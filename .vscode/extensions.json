@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "Gruntfuggly.todo-tree",
+    "ms-vscode.cpptools",
+    "ms-vscode.cpptools-extension-pack",
+    "ms-vscode.cpptools-themes",
+    "github.vscode-github-actions",
+    "donjayamanne.githistory",
+    "yzhang.markdown-all-in-one",
+    "esbenp.prettier-vscode"
+  ]
+}
