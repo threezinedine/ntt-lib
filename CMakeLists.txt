@@ -109,43 +109,45 @@ target_compile_definitions(
     ${COMMON_DEFINITIONS}
 )
 
-# library testing target
-file(
-    GLOB_RECURSE
-    TEST_SOURCE_FILES
-    test/*.cpp
-)
+if (NOT NTTLib_USE_ONLY)
+    # library testing target
+    file(
+        GLOB_RECURSE
+        TEST_SOURCE_FILES
+        test/*.cpp
+    )
 
-set(TEST_PROJECT_NAME ${PROJECT_NAME}_test)
+    set(TEST_PROJECT_NAME ${PROJECT_NAME}_test)
 
-add_executable(
-    ${TEST_PROJECT_NAME}
-    ${TEST_SOURCE_FILES}
-)
+    add_executable(
+        ${TEST_PROJECT_NAME}
+        ${TEST_SOURCE_FILES}
+    )
 
-target_include_directories(
-    ${TEST_PROJECT_NAME}
-    PRIVATE
-    include
-)
+    target_include_directories(
+        ${TEST_PROJECT_NAME}
+        PRIVATE
+        include
+    )
 
-target_link_libraries(
-    ${TEST_PROJECT_NAME}
-    PUBLIC
-    ${EXTERNAL_LIBS}
-    ${PROJECT_NAME}
-    PRIVATE
-    gtest 
-    gmock
-)
+    target_link_libraries(
+        ${TEST_PROJECT_NAME}
+        PUBLIC
+        ${EXTERNAL_LIBS}
+        ${PROJECT_NAME}
+        PRIVATE
+        gtest 
+        gmock
+    )
 
-target_compile_definitions(
-    ${TEST_PROJECT_NAME}
-    PUBLIC
-    ${COMMON_DEFINITIONS}
-)
+    target_compile_definitions(
+        ${TEST_PROJECT_NAME}
+        PUBLIC
+        ${COMMON_DEFINITIONS}
+    )
 
-# examples target
-set(CMAKE_FOLDER "examples")
-add_subdirectory(examples)
-unset(CMAKE_FOLDER)
+    # examples target
+    set(CMAKE_FOLDER "examples")
+    add_subdirectory(examples)
+    unset(CMAKE_FOLDER)
+endif()

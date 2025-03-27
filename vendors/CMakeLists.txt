@@ -3,10 +3,12 @@
 
 # Add all vendors here
 
-if (MSVC)
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
-    set(gtest_force_shared_crt ON CACHE BOOL "Use shared CRT" FORCE)
-endif()
+if (NOT NTTLib_USE_ONLY)
+    if (MSVC)
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
+        set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
+        set(gtest_force_shared_crt ON CACHE BOOL "Use shared CRT" FORCE)
+    endif()
 
-add_subdirectory(googletest EXCLUDE_FROM_ALL)
+    add_subdirectory(googletest EXCLUDE_FROM_ALL)
+endif()
