@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(NTTLib)
 
 set(CMAKE_CXX_STANDARD 14)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 file(
     GLOB_RECURSE
@@ -24,11 +25,27 @@ set(
     EXTERNAL_LIBS 
 )
 
+set(CMAKE_FOLDER "vendors")
 add_subdirectory(vendors)
+unset(CMAKE_FOLDER)
 
 set(
     COMMON_DEFINITIONS
 )
+
+if (UNIX)
+    set(
+        COMMON_DEFINITIONS  
+        ${COMMON_DEFINITIONS}
+        -DNTT_PLATFORM_UNIX
+    )
+else()
+    set(
+        COMMON_DEFINITIONS
+        ${COMMON_DEFINITIONS}
+        -DNTT_PLATFORM_WINDOWS
+    )
+endif()
 
 if (MSVC)
     set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Available build configurations" FORCE)
@@ -127,3 +144,8 @@ target_compile_definitions(
     PUBLIC
     ${COMMON_DEFINITIONS}
 )
+
+# examples target
+set(CMAKE_FOLDER "examples")
+add_subdirectory(examples)
+unset(CMAKE_FOLDER)

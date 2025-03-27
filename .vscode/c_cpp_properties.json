@@ -3,7 +3,13 @@
     {
       "name": "Win32",
       "includePath": ["${workspaceFolder}/**"],
-      "defines": ["_DEBUG", "UNICODE", "_UNICODE", "NTT_DEBUG"],
+      "defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE",
+        "NTT_DEBUG",
+        "NTT_PLATFORM_WINDOWS"
+      ],
       "windowsSdkVersion": "10.0.22621.0",
       "compilerPath": "cl.exe",
       "cStandard": "c17",
