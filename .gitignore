@@ -33,3 +33,7 @@
 
 # build folder
 build/
+
+# docs folder
+docs/html
+docs/latex
