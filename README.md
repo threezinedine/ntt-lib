@@ -112,7 +112,6 @@ This library provides a suite of utilities to help streamline everyday tasks and
 - [x] Assertion utilities
 - [x] String formatting utilities
 - [x] Smart pointers
-- [ ] Error handling utilities
 - [ ] Console printing utilities
 - [ ] Concurrent utilities
 
