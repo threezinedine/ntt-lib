@@ -37,11 +37,19 @@ if (MSVC)
     set(
         COMMON_DEFINITIONS
         ${COMMON_DEFINITIONS}
-        -NTT_MSVC
+        -DNTT_MSVC
         $<$<CONFIG:Debug>:NTT_DEBUG>
         $<$<CONFIG:Release>:NTT_NDEBUG>
     )
 else()
+    add_compile_options(
+        -Wall
+        -Wextra
+        -Werror
+        -Wswitch-enum
+        -Wcast-align
+    )
+
     if (CMAKE_BUILD_TYPE STREQUAL "Debug")
         set(
             COMMON_DEFINITIONS

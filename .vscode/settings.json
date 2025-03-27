@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*.py": "python",
+    "chrono": "cpp",
+    "format": "cpp",
+    "thread": "cpp",
+    "vector": "cpp",
+    "string": "cpp",
+    "iomanip": "cpp"
+  }
+}
