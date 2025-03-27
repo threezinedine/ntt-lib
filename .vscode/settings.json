@@ -6,6 +6,9 @@
     "thread": "cpp",
     "vector": "cpp",
     "string": "cpp",
-    "iomanip": "cpp"
+    "iomanip": "cpp",
+    "charconv": "cpp",
+    "xmemory": "cpp",
+    "memory": "cpp"
   }
 }

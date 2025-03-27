@@ -108,10 +108,10 @@ To include the library in your C++ project, add the following line to your sourc
 
 This library provides a suite of utilities to help streamline everyday tasks and enforce best practices in C++ development. The following features are currently supported:
 
-- [ ] Type traits
+- [x] Type traits
 - [x] Assertion utilities
 - [x] String formatting utilities
-- [ ] Smart pointers
+- [x] Smart pointers
 - [ ] Error handling utilities
 - [ ] Console printing utilities
 - [ ] Concurrent utilities
