@@ -4,6 +4,9 @@ project(NTTLib)
 set(CMAKE_CXX_STANDARD 14)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+option(NTTLib_USE_EXAMPLES "Enable examples" OFF)
+option(NTTLib_USE_TESTS "Enable tests" OFF)
+
 file(
     GLOB_RECURSE
     CPP_SOURCE_FILES
@@ -109,7 +112,7 @@ target_compile_definitions(
     ${COMMON_DEFINITIONS}
 )
 
-if (NOT NTTLib_USE_ONLY)
+if (NTTLib_USE_TESTS)
     # library testing target
     file(
         GLOB_RECURSE
@@ -145,7 +148,9 @@ if (NOT NTTLib_USE_ONLY)
         PUBLIC
         ${COMMON_DEFINITIONS}
     )
+endif()
 
+if (NTTLib_USE_EXAMPLES)
     # examples target
     set(CMAKE_FOLDER "examples")
     add_subdirectory(examples)

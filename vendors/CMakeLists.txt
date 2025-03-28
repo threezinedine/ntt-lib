@@ -3,7 +3,7 @@
 
 # Add all vendors here
 
-if (NOT NTTLib_USE_ONLY)
+if (NTTLib_USE_TESTS)
     if (MSVC)
         set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
         set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
