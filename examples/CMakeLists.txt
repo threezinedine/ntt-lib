@@ -19,10 +19,4 @@ foreach(EXAMPLES_SOURCE_FILE ${EXAMPLES_SOURCE_FILES})
         PRIVATE
         ${PROJECT_NAME}
     )
-
-    target_include_directories(
-        ${EXAMPLES_TARGET_NAME}
-        PRIVATE
-        ../include
-    )
 endforeach()

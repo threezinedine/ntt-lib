@@ -96,8 +96,9 @@ add_library(
 
 target_include_directories(
     ${PROJECT_NAME}
-    PUBLIC
+    PUBLIC 
     ./src
+    ./include
 )
 
 target_link_libraries(
