@@ -3,6 +3,7 @@
 #include "memory.hpp"
 #include "def_utils.hpp"
 #include <vector>
+#include "format.hpp"
 
 namespace NTT_NS
 {
@@ -124,4 +125,14 @@ namespace NTT_NS
     private:
         NTT_PRIVATE_DEF(JSON);
     };
+
+    /**
+     * Format the JSON object to a string.
+     *
+     * @param formatMsg The format message.
+     * @param jsonObj The JSON object to be formatted.
+     * @return A string with the formatted JSON object.
+     */
+    template <>
+    String format(const String &formatMsg, const JSON &jsonObj);
 } // namespace NTT_NS

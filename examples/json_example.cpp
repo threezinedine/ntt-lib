@@ -19,6 +19,6 @@ int main(void)
         "stringKey": "Hello World"
     })";
     JSON jsonObj = JSON::parse(jsonString);
-    print(format("{}", jsonObj.dump()));
+    print(format("{}", jsonObj));
     return 0;
 }

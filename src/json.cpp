@@ -344,4 +344,11 @@ namespace NTT_NS
 
         return resultList;
     }
+
+    // format json object to string
+    template <>
+    String format(const String &formatMsg, const JSON &jsonObj)
+    {
+        return format(formatMsg, jsonObj.dump());
+    }
 } // namespace NTT_NS
