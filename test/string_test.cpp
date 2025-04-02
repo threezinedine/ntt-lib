@@ -80,3 +80,98 @@ TEST(StringTest, SplitStringWithMultipleDelimiters)
     std::vector<String> list = str.split(", ");
     EXPECT_EQ(list.size(), 3);
 }
+
+TEST(StringTest, TestTrimDefault)
+{
+    String str = " Hello, World! ";
+    str.trim();
+    EXPECT_EQ(str, "Hello, World!");
+}
+
+TEST(StringTest, TestTrimLeft)
+{
+    String str = " Hello, World! ";
+    str.trim(NTT_STRING_TRIM_LEFT);
+    EXPECT_EQ(str, "Hello, World! ");
+}
+
+TEST(StringTest, TestTrimRight)
+{
+    String str = " Hello, World! ";
+    str.trim(NTT_STRING_TRIM_RIGHT);
+    EXPECT_EQ(str, " Hello, World!");
+}
+
+TEST(StringTest, TestTrimWithNoSpace)
+{
+    String str = "Hello, World!";
+    str.trim();
+    EXPECT_EQ(str, "Hello, World!");
+}
+
+TEST(StringTest, TestTrimWithEmptyFlags)
+{
+    String str = " Hello, World! ";
+    str.trim(0);
+    EXPECT_EQ(str, " Hello, World! ");
+}
+
+TEST(StringTest, TestTrimEmtpyString)
+{
+    String str = "";
+    str.trim();
+    EXPECT_EQ(str, "");
+}
+
+TEST(StringTest, TestTrimAListOfSpaceCharactersWithFullFlags)
+{
+    String str = "                                   ";
+    str.trim();
+    EXPECT_EQ(str, "");
+}
+
+TEST(StringTest, TestTrimRightOfEmtpyString)
+{
+    String str = "";
+    str.trim(NTT_STRING_TRIM_RIGHT);
+    EXPECT_EQ(str, "");
+}
+
+TEST(StringTest, TestTrimLeftOfEmtpyString)
+{
+    String str = "";
+    str.trim(NTT_STRING_TRIM_LEFT);
+    EXPECT_EQ(str, "");
+}
+
+TEST(StringTest, JoinStrings)
+{
+    std::vector<String> strings = {"Hello", "World", "!"};
+    String delimiter = ", ";
+    String result = String::Concat(strings, delimiter);
+    EXPECT_EQ(result, "Hello, World, !");
+}
+
+TEST(StringTest, JoinStringsWithEmptyString)
+{
+    std::vector<String> strings = {"Hello", "", "World", "!"};
+    String delimiter = ", ";
+    String result = String::Concat(strings, delimiter);
+    EXPECT_EQ(result, "Hello, , World, !");
+}
+
+TEST(StringTest, JoinStringsWithEmptyDelimiter)
+{
+    std::vector<String> strings = {"Hello", "World", "!"};
+    String delimiter = "";
+    String result = String::Concat(strings, delimiter);
+    EXPECT_EQ(result, "HelloWorld!");
+}
+
+TEST(StringTest, JoinStringsWithEmptyStringList)
+{
+    std::vector<String> strings = {};
+    String delimiter = ", ";
+    String result = String::Concat(strings, delimiter);
+    EXPECT_EQ(result, "");
+}

@@ -3,6 +3,9 @@
 #include <string>
 #include <vector>
 
+#define NTT_STRING_TRIM_LEFT (1)
+#define NTT_STRING_TRIM_RIGHT (1 << 1)
+
 namespace NTT_NS
 {
     /**
@@ -18,6 +21,9 @@ namespace NTT_NS
         String(const String &str);
         String(String &&str);
         ~String();
+
+        String &operator=(const String &str);
+        String &operator=(String &&str);
 
     public:
         // TODO: Add the way for ignoring some pattern inside the string which will not be replaced.
@@ -59,5 +65,24 @@ namespace NTT_NS
          * @return The list of strings which is separated by the delimiters from the current string.
          */
         std::vector<String> split(const String &delimiters = NTT_STRING_SPACE) const;
+
+        /**
+         * Delete all space characters from the left or right (or both) side of the current string.
+         *
+         * @param flags The flags which will be used to determine which side of the current string will be trimmed.
+         *      The default value is `NTT_STRING_TRIM_LEFT | NTT_STRING_TRIM_RIGHT`.
+         *      Can use only one of the following values: `NTT_STRING_TRIM_LEFT`, `NTT_STRING_TRIM_RIGHT`.
+         */
+        void trim(u8 flags = NTT_STRING_TRIM_LEFT | NTT_STRING_TRIM_RIGHT);
+
+        /**
+         * Join a list of strings into a single string with a delimiter.
+         *
+         * @param strings The list of strings which will be joined.
+         * @param delimiter The delimiter which will be used to join the strings.
+         *      The default value is `NTT_STRING_SPACE`.
+         * @return The joined string.
+         */
+        static String Concat(const std::vector<String> &strings, const String &delimiter = NTT_STRING_SPACE);
     };
 } // namespace NTT_NS
