@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(NTTLib)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 option(NTTLib_USE_EXAMPLES "Enable examples" OFF)
@@ -26,6 +27,10 @@ set(
 
 set(
     EXTERNAL_LIBS 
+)
+
+set(
+    PRIVATE_EXTERNAL_LIBS
 )
 
 set(CMAKE_FOLDER "vendors")
@@ -99,12 +104,15 @@ target_include_directories(
     PUBLIC 
     ./src
     ./include
+    ${CMAKE_CURRENT_SOURCE_DIR}/vendors/json/include
 )
 
 target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC
     ${EXTERNAL_LIBS}
+    PRIVATE 
+    ${PRIVATE_EXTERNAL_LIBS}
 )
 
 target_compile_definitions(

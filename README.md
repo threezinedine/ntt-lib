@@ -113,6 +113,7 @@ This library provides a suite of utilities to help streamline everyday tasks and
 - [x] String formatting utilities
 - [x] Smart pointers
 - [x] Console printing utilities
+- [x] JSON utilities
 - [ ] Concurrent utilities
 
 ## Contributing
