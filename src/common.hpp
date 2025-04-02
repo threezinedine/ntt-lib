@@ -4,3 +4,4 @@
 #include "primitive_defs.hpp"
 
 #define NTT_STRING_EMPTY ""
+#define NTT_STRING_SPACE " "

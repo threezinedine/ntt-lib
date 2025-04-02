@@ -30,4 +30,32 @@ namespace NTT_NS
         String result = Replace(target, replacement, all);
         this->swap(result);
     }
+
+    std::vector<String> String::split(const String &delimiters) const
+    {
+        std::vector<String> splittedStrings;
+        if (delimiters == NTT_STRING_EMPTY)
+        {
+            splittedStrings.push_back(*this);
+            return splittedStrings;
+        }
+
+        size_t startPos = 0;
+
+        size_t currentDelimiterPos = find(delimiters, startPos);
+
+        while (currentDelimiterPos != std::string::npos)
+        {
+            String current = substr(startPos, currentDelimiterPos - startPos);
+            splittedStrings.push_back(current);
+
+            startPos = currentDelimiterPos + delimiters.length();
+            currentDelimiterPos = find(delimiters, startPos);
+        }
+
+        String last = substr(startPos);
+        splittedStrings.push_back(last);
+
+        return splittedStrings;
+    }
 } // namespace NTT_NS

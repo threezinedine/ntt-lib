@@ -1,6 +1,7 @@
 #pragma once
 #include "common.hpp"
 #include <string>
+#include <vector>
 
 namespace NTT_NS
 {
@@ -47,5 +48,16 @@ namespace NTT_NS
          *      The default value is `false`.
          */
         void Replace_I(const String &target, const String &replacement, bool all = NTT_FALSE);
+
+        /**
+         * Obtain the list of strings which is separated by the delimiters from
+         *      the current string.
+         *
+         * @param delimiters The delimiters which will be used to split the current string.
+         *      If the delimiters is empty, the current string will be returned as a single element.
+         *      The default value is `NTT_STRING_SPACE`.
+         * @return The list of strings which is separated by the delimiters from the current string.
+         */
+        std::vector<String> split(const String &delimiters = NTT_STRING_SPACE) const;
     };
 } // namespace NTT_NS
