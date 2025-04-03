@@ -33,9 +33,12 @@ set(
     PRIVATE_EXTERNAL_LIBS
 )
 
-set(CMAKE_FOLDER "vendors")
-add_subdirectory(vendors)
-unset(CMAKE_FOLDER)
+# check if the vendors folder exists
+if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/vendors)
+    set(CMAKE_FOLDER "vendors")
+    add_subdirectory(vendors)
+    unset(CMAKE_FOLDER)
+endif()
 
 set(
     COMMON_DEFINITIONS
