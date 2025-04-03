@@ -1,14 +1,10 @@
-# Load all vendors, these vendors will not be visible to the user
-# but will be used by the build system to build the project
+####### Start adding the googletest #######
+set(gtest_force_shared_crt ON CACHE BOOL "Use shared CRT" FORCE)
 
-# Add all vendors here
+add_subdirectory(googletest)
+####### End adding the googletest #######
 
-if (NTTLib_USE_TESTS)
-    if (MSVC)
-        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
-        set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
-        set(gtest_force_shared_crt ON CACHE BOOL "Use shared CRT" FORCE)
-    endif()
+####### Start adding the json #######
+add_subdirectory(json)
+####### End adding the json #######
 
-    add_subdirectory(googletest EXCLUDE_FROM_ALL)
-endif()

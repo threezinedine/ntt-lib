@@ -37,3 +37,5 @@ build/
 # docs folder
 docs/html
 docs/latex
+
+vendors
