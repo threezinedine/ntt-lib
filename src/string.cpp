@@ -1,6 +1,9 @@
 #include "string.hpp"
 #include "format.hpp"
 #include "def_utils.hpp"
+#include <cstring>
+
+#define PATTERN_TRIGGER "@"
 
 namespace NTT_NS
 {
@@ -126,6 +129,48 @@ namespace NTT_NS
         }
 
         return newSplittedStrings;
+    }
+
+    bool String::matchPattern(const String &pattern)
+    {
+        const String patternTrigger = PATTERN_TRIGGER;
+        if (pattern.length() > length())
+        {
+            return false;
+        }
+
+        size_t currentPatternIndex = 0;
+        size_t previousPatternIndex = 0;
+
+        size_t currentStringIndex = 0;
+
+        while (currentPatternIndex != std::string::npos)
+        {
+            size_t currentPatternStringLength = currentPatternIndex - previousPatternIndex;
+            const String currentPatternString = pattern.substr(previousPatternIndex, currentPatternStringLength);
+
+            size_t matchedPatternInStringIndex = find(currentPatternString, currentStringIndex);
+
+            if (matchedPatternInStringIndex == std::string::npos)
+            {
+                return false;
+            }
+
+            currentStringIndex += matchedPatternInStringIndex + currentPatternStringLength;
+            previousPatternIndex = currentPatternIndex + patternTrigger.length();
+            currentPatternIndex = pattern.find(patternTrigger, previousPatternIndex);
+        }
+
+        size_t currentPatternStringLength = pattern.length() - previousPatternIndex;
+        const String currentPatternString = pattern.substr(previousPatternIndex, currentPatternStringLength);
+        const String tempSubString = substr(length() - currentPatternStringLength, currentPatternStringLength);
+
+        if (tempSubString != currentPatternString)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     void String::trim(u8 flags)

@@ -101,14 +101,36 @@ namespace NTT_NS
         void trim(u8 flags = NTT_STRING_TRIM_LEFT | NTT_STRING_TRIM_RIGHT);
 
         /**
-         * TODO: Just for implementing the split function, later using the `matchPattern`
-         *      the general usage.
+         * Used for checking whether the current string have the similar pattern as given or not.
+         *
+         * @param pattern The pattern will be used to check. The format of the patern will contains
+         *      the `@` for the wildcard string (Ex: "Hello @").
+         *
+         * @example
+         * ```c++
+         * bool result = String("Hello World").matchPattern("Hello @"); // result = true
+         * bool result = String("HelloWorld").matchPattern("Hello @"); // result = false
+         * bool result = String("Hello World").matchPattern("@World"); // result = true
+         * bool result = String("Hello World").matchPattern("@@"); // result = true
+         * ```
+         */
+        bool matchPattern(const String &pattern);
+
+        /**
+         * Used for checking the current string begins with a given string or not
+         *
+         * @param pattern The pattern will be used to check.
+         * @retval `true` if the current string begins with the given pattern.
+         * @retval `false` if the current string is empty or not begins with the given pattern.
          */
         bool startsWith(const String &pattern);
 
         /**
-         * TODO: Just for implementing the split function, later using the `matchPattern`
-         *      the general usage.
+         * Used for checking the current string ends with a given string or not
+         *
+         * @param pattern The pattern will be used to check.
+         * @retval `true` if the current string ends with the given pattern.
+         * @retval `false` if the current string is empty or not ends with the given pattern.
          */
         bool endsWith(const String &pattern);
 

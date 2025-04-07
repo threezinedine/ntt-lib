@@ -113,6 +113,27 @@ TEST(StringTest, SplitStringWithMultipleDelimiters)
     EXPECT_EQ(list.size(), 3);
 }
 
+TEST(StringTest, TestMatchPattern)
+{
+    EXPECT_TRUE(String("Hello World").matchPattern("Hello @"));
+    EXPECT_TRUE(String("Hello World").matchPattern("@ World"));
+}
+
+TEST(StringTest, TestMatchPattern_False)
+{
+    EXPECT_FALSE(String("Hello World").matchPattern("Hallo @"));
+    EXPECT_FALSE(String("Hello World").matchPattern("@ Werld"));
+}
+
+TEST(StringTest, TestMatchPattern_MultiplePatterns)
+{
+    EXPECT_FALSE(String("Hello World").matchPattern("Hello @ Test"));
+    EXPECT_TRUE(String("Hello World").matchPattern("Hel@ World"));
+    EXPECT_TRUE(String("Hello World").matchPattern("Hel@rld"));
+    EXPECT_FALSE(String("Hello World").matchPattern("He@lo @Test"));
+    EXPECT_TRUE(String("Hello World").matchPattern("H@lo W@"));
+}
+
 TEST(StringTest, TestTrimDefault)
 {
     String str = " Hello, World! ";
