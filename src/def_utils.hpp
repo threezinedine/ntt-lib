@@ -18,7 +18,7 @@ private:                     \
  *      but not reducing the performance in release mode.
  */
 #ifdef NTT_DEBUG
-#define NTT_UNUSED(var) var
+#define NTT_UNUSED(var) (void)var
 #else
 #define NTT_UNUSED(var)
 #endif
