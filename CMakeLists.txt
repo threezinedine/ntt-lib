@@ -27,6 +27,7 @@ set(
 
 set(
     EXTERNAL_LIBS 
+    nlohmann_json
 )
 
 set(
