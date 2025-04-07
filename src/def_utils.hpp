@@ -12,3 +12,13 @@
 private:                     \
     class cls##Private;      \
     Scope<cls##Private> impl
+
+/**
+ * Used for suppressing unused variable warnings in both debug and release mode
+ *      but not reducing the performance in release mode.
+ */
+#ifdef NTT_DEBUG
+#define NTT_UNUSED(var) var
+#else
+#define NTT_UNUSED(var)
+#endif
