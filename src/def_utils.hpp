@@ -17,8 +17,4 @@ private:                     \
  * Used for suppressing unused variable warnings in both debug and release mode
  *      but not reducing the performance in release mode.
  */
-#ifdef NTT_DEBUG
 #define NTT_UNUSED(var) (void)var
-#else
-#define NTT_UNUSED(var)
-#endif
