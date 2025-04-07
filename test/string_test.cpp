@@ -74,6 +74,38 @@ TEST(StringTest, SplitWithDelimeterAtTheBeginning)
     EXPECT_EQ(list[1], "Hello1 World");
 }
 
+TEST(StringTest, SplitWithDelimiterAndMatchingCompressKey)
+{
+    String str = "Hello \"World Mem\" World!";
+    std::vector<String> list = str.split(" ", {"\"", "\""});
+    EXPECT_EQ(list.size(), 3);
+    EXPECT_EQ(list[0], "Hello");
+    EXPECT_EQ(list[1], "\"World Mem\"");
+    EXPECT_EQ(list[2], "World!");
+}
+
+TEST(StringTest, SplitWithDelimiterAndWithNotMatchingCompressKey)
+{
+    String str = "Hello \"World Mem World!";
+    std::vector<String> list = str.split(" ", {"\"", "\""});
+    EXPECT_EQ(list.size(), 4);
+    EXPECT_EQ(list[0], "Hello");
+    EXPECT_EQ(list[1], "\"World");
+    EXPECT_EQ(list[2], "Mem");
+    EXPECT_EQ(list[3], "World!");
+}
+
+TEST(StringTest, SplitWithMultipleCompressKeys)
+{
+    String str = "Hello \"World Mem\" World! \"Hello Manbo\"";
+    std::vector<String> list = str.split(" ", {"\"", "\""});
+    EXPECT_EQ(list.size(), 4);
+    EXPECT_EQ(list[0], "Hello");
+    EXPECT_EQ(list[1], "\"World Mem\"");
+    EXPECT_EQ(list[2], "World!");
+    EXPECT_EQ(list[3], "\"Hello Manbo\"");
+}
+
 TEST(StringTest, SplitStringWithMultipleDelimiters)
 {
     String str = "Hello, World, World!";

@@ -1,5 +1,6 @@
 #include "string.hpp"
 #include "format.hpp"
+#include "def_utils.hpp"
 
 namespace NTT_NS
 {
@@ -44,7 +45,9 @@ namespace NTT_NS
         this->swap(result);
     }
 
-    std::vector<String> String::split(const String &delimiters) const
+    std::vector<String> String::split(
+        const String &delimiters,
+        const std::pair<String, String> compress_key) const
     {
         std::vector<String> splittedStrings;
         if (delimiters == NTT_STRING_EMPTY)
@@ -69,7 +72,60 @@ namespace NTT_NS
         String last = substr(startPos);
         splittedStrings.push_back(last);
 
-        return splittedStrings;
+        // Compress the strings
+        if (compress_key.first == NTT_STRING_EMPTY)
+        {
+            return splittedStrings;
+        }
+
+        std::vector<String> newSplittedStrings;
+
+        bool isCompressKeyFound = false;
+        u32 compressKeyIndex = 0;
+
+        for (u32 tempStringIndex = 0; tempStringIndex < (u32)splittedStrings.size(); tempStringIndex++)
+        {
+            String &tempString = splittedStrings[tempStringIndex];
+
+            if (tempString.startsWith(compress_key.first) && !isCompressKeyFound)
+            {
+                isCompressKeyFound = true;
+                compressKeyIndex = tempStringIndex;
+                continue;
+            }
+
+            if (isCompressKeyFound)
+            {
+                if (tempString.endsWith(compress_key.second))
+                {
+                    String newCompressedString = "";
+                    for (u32 i = compressKeyIndex; i <= tempStringIndex; i++)
+                    {
+                        newCompressedString += splittedStrings[i];
+                        if (i < tempStringIndex)
+                        {
+                            newCompressedString += delimiters;
+                        }
+                    }
+                    newSplittedStrings.push_back(newCompressedString);
+                    isCompressKeyFound = false;
+                }
+
+                continue;
+            }
+
+            newSplittedStrings.push_back(tempString);
+        }
+
+        if (isCompressKeyFound)
+        {
+            for (u32 i = compressKeyIndex; i < splittedStrings.size(); i++)
+            {
+                newSplittedStrings.push_back(splittedStrings[i]);
+            }
+        }
+
+        return newSplittedStrings;
     }
 
     void String::trim(u8 flags)
@@ -109,6 +165,26 @@ namespace NTT_NS
                 }
             }
         }
+    }
+
+    bool String::startsWith(const String &pattern)
+    {
+        if (pattern.length() > length())
+        {
+            return false;
+        }
+
+        return substr(0, pattern.length()) == pattern;
+    }
+
+    bool String::endsWith(const String &pattern)
+    {
+        if (pattern.length() > length())
+        {
+            return false;
+        }
+
+        return substr(length() - pattern.length()) == pattern;
     }
 
     String String::Concat(const std::vector<String> &strings, const String &delimiter)

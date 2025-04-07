@@ -53,4 +53,31 @@ namespace NTT_NS
     {
         return formatMsg.Replace("{}", value ? "true" : "false");
     }
+
+#define NTT_FORMAT_TYPE_VECTOR_DEFINITION(type)                                 \
+    String format(const String &formatMsg, const std::vector<type> &value)      \
+    {                                                                           \
+        String result = formatMsg;                                              \
+        std::vector<String> elementStrings;                                     \
+        for (const auto &item : value)                                          \
+        {                                                                       \
+            elementStrings.push_back(format("{}", item));                       \
+        }                                                                       \
+                                                                                \
+        String arrayStr = format("[{}]", String::Concat(elementStrings, ", ")); \
+        return format(formatMsg, arrayStr);                                     \
+    }
+
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(u8);
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(i8);
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(u16);
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(i16);
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(u32);
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(i32);
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(u64);
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(i64);
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(f32);
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(f64);
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(String);
+    NTT_FORMAT_TYPE_VECTOR_DEFINITION(bool);
 } // namespace NTT_NS

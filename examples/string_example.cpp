@@ -5,13 +5,8 @@ using namespace NTT_NS;
 int main(void)
 {
     std::vector<String> list = String("Hello, World, World!").split(", ");
-
-    print(format("Size of the list: {}", list.size()));
-
-    for (const auto &item : list)
-    {
-        print(format("{}", item));
-    }
-
+    print(format("List: {}", list));
+    print(format("Compress List: {}", String("Hello \"World Mem\" World")
+                                          .split(" ", {"\"", "\""})));
     return 0;
 }

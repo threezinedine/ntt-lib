@@ -1,10 +1,12 @@
 #pragma once
 #include "common.hpp"
 #include <string>
+#include <utility>
 #include <vector>
 
 #define NTT_STRING_TRIM_LEFT (1)
 #define NTT_STRING_TRIM_RIGHT (1 << 1)
+#define NTT_EMPTY_COMPRESS_KEY (std::pair<String, String>{"", ""})
 
 namespace NTT_NS
 {
@@ -62,9 +64,32 @@ namespace NTT_NS
          * @param delimiters The delimiters which will be used to split the current string.
          *      If the delimiters is empty, the current string will be returned as a single element.
          *      The default value is `NTT_STRING_SPACE`.
+         * @param compress_key The compress key which will be used to compress the strings.
+         *      The content inside the compress key will be compressed into a single element which will
+         *          not be split by the delimiters.
+         *      These keys only work when the compress keys are at the beginning of a splitted element
+         *          and at the end of another splitted element.
+         *      The default value is `NTT_EMPTY_COMPRESS_KEY`.
          * @return The list of strings which is separated by the delimiters from the current string.
+         *
+         * @example
+         * ```c++
+         *      String str = "Hello \"World Mem\" World!";
+         *      std::vector<String> list = str.split(" ", {"\"", "\""});
+         *      // list[0] = "Hello"
+         *      // list[1] = "\"World Mem\"" // The " is at the beginning and end of the separated element.
+         *      // list[2] = "World!"
+         *
+         *      str = String("Hello \"World Mem\"World!");
+         *      list = str.split(" ", {"\"", "\""});
+         *      // list[0] = "Hello"
+         *      // list[1] = "\"World";
+         *      // list[2] = "Mem\"World" // The " is not at the end of the separated element.
+         * ```
          */
-        std::vector<String> split(const String &delimiters = NTT_STRING_SPACE) const;
+        std::vector<String> split(
+            const String &delimiters = NTT_STRING_SPACE,
+            const std::pair<String, String> compress_key = NTT_EMPTY_COMPRESS_KEY) const;
 
         /**
          * Delete all space characters from the left or right (or both) side of the current string.
@@ -74,6 +99,18 @@ namespace NTT_NS
          *      Can use only one of the following values: `NTT_STRING_TRIM_LEFT`, `NTT_STRING_TRIM_RIGHT`.
          */
         void trim(u8 flags = NTT_STRING_TRIM_LEFT | NTT_STRING_TRIM_RIGHT);
+
+        /**
+         * TODO: Just for implementing the split function, later using the `matchPattern`
+         *      the general usage.
+         */
+        bool startsWith(const String &pattern);
+
+        /**
+         * TODO: Just for implementing the split function, later using the `matchPattern`
+         *      the general usage.
+         */
+        bool endsWith(const String &pattern);
 
         /**
          * Join a list of strings into a single string with a delimiter.
