@@ -228,3 +228,21 @@ TEST(StringTest, JoinStringsWithEmptyStringList)
     String result = String::Concat(strings, delimiter);
     EXPECT_EQ(result, "");
 }
+
+TEST(StringTest, TestSplitMultipleStringInsideALargerString)
+{
+    const String str = "program -v 1.0.0 -c \"Testing\" -r \"Hello World\" --use-color";
+
+    std::vector<String> list = str.split(" ", {"\"", "\""});
+    EXPECT_THAT(
+        list,
+        ::testing::ElementsAre(
+            "program",
+            "-v",
+            "1.0.0",
+            "-c",
+            "\"Testing\"",
+            "-r",
+            "\"Hello World\"",
+            "--use-color"));
+}

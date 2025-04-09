@@ -90,7 +90,9 @@ namespace NTT_NS
         {
             String &tempString = splittedStrings[tempStringIndex];
 
-            if (tempString.startsWith(compress_key.first) && !isCompressKeyFound)
+            if (tempString.startsWith(compress_key.first) &&
+                !isCompressKeyFound &&
+                !tempString.endsWith(compress_key.second))
             {
                 isCompressKeyFound = true;
                 compressKeyIndex = tempStringIndex;
