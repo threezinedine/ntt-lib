@@ -135,6 +135,16 @@ namespace NTT_NS
         bool endsWith(const String &pattern);
 
         /**
+         * Get the substring of the current string.
+         * TODO: Enrich the interface later
+         *
+         * @param start The start index of the substring.
+         * @param length The length of the substring.
+         * @return The substring of the current string.
+         */
+        String substring(u32 start, u32 length);
+
+        /**
          * Join a list of strings into a single string with a delimiter.
          *
          * @param strings The list of strings which will be joined.

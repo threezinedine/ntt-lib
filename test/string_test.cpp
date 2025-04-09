@@ -246,3 +246,10 @@ TEST(StringTest, TestSplitMultipleStringInsideALargerString)
             "\"Hello World\"",
             "--use-color"));
 }
+
+TEST(StringTest, TestSubString)
+{
+    String str = "Hello, World!";
+    String result = str.substring(0, 5);
+    EXPECT_EQ(result, "Hello");
+}

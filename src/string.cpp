@@ -234,6 +234,11 @@ namespace NTT_NS
         return substr(length() - pattern.length()) == pattern;
     }
 
+    String String::substring(u32 start, u32 length)
+    {
+        return substr(start, length);
+    }
+
     String String::Concat(const std::vector<String> &strings, const String &delimiter)
     {
         if (strings.size() == 0)
